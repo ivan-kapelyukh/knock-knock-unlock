@@ -1,14 +1,18 @@
-class KnockRecorder {
+export class KnockRecorder {
   constructor() {
     this._knocks = [];
   }
 
   start() {
-    document.addEventListener("keypress", this._keyPressHandler);
+    document.addEventListener("keypress", () => {
+      this._keyPressHandler();
+    });
   }
 
   stop() {
-    document.removeEventListener("keypress", this._keyPressHandler);
+    document.removeEventListener("keypress", () => {
+      this._keyPressHandler();
+    });
 
     return this._processed_knocks();
   }
@@ -21,7 +25,7 @@ class KnockRecorder {
     }
 
     let last_knock = this._knocks[0];
-    for (let i = 1; i < res.length; i++) {
+    for (let i = 1; i < this._knocks.length; i++) {
       let knock_interval = this._knocks[i] - last_knock;
       res.push(knock_interval);
       last_knock = this._knocks[i];
@@ -31,6 +35,6 @@ class KnockRecorder {
   }
 
   _keyPressHandler(e) {
-    this._knocks.push(Date.now().getTime());
+    this._knocks.push(Date.now());
   }
 }
