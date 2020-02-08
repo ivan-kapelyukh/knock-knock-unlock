@@ -1,6 +1,11 @@
 export class KnockRecorder {
   constructor() {
     this._knocks = [];
+    this._listeners = [];
+  }
+
+  add_knock_listener(listener) {
+    this._listeners.push(listener);
   }
 
   start() {
@@ -36,5 +41,9 @@ export class KnockRecorder {
 
   _keyPressHandler(e) {
     this._knocks.push(Date.now());
+
+    for (let listener in this._listeners) {
+      listener();
+    }
   }
 }
