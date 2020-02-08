@@ -1,0 +1,15 @@
+{
+  "name": "knock-knock-unlock",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint .",
+    "build": "parcel build index.html",
+    "start": "parcel index.html"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "parcel-bundler": "^1.12.4"
+  }
+}
