@@ -6,11 +6,12 @@ import (
 )
 
 func main() {
+	// Intervals in milliseconds
 	// Straw, be-rry. Cheese-cake.
-	attempt := []int{1000, 1200, 2000, 2200}
+	attempt := []int{1000, 500, 1000, 500}
 
-	sigs := [][]int{{800, 1100, 2100, 2200},
-		{1100, 1200, 1900, 2250},
+	sigs := [][]int{{800, 600, 1050, 520},
+		{1100, 480, 970, 510},
 		{100, 100, 100, 100}}
 
 	fmt.Printf("Matches majority? %v", MatchesMajority(attempt, sigs))
@@ -32,13 +33,13 @@ func MatchesMajority(attempt []int, sigs [][]int) bool {
 
 // Pre: both are normalised
 func matches(a []float64, b []float64) bool {
-	threshold := 0.1
+	threshold := 0.05
 	rse, _ := getRse(a, b)
 	return rse < threshold
 }
 
 // Get pointwise root squared error
-// Input values should be sorted and between 0 and 1
+// Input values should be normalised
 func getRse(a []float64, b []float64) (rse float64, err error) {
 	if len(a) != len(b) {
 		return -1, fmt.Errorf("need same number of points to calculate error")
@@ -51,12 +52,14 @@ func getRse(a []float64, b []float64) (rse float64, err error) {
 	return math.Sqrt(rse / float64(len(a))), nil
 }
 
-// Pre: points is sorted, e.g. 3, 15, 67
-func normalise(points []float64) []float64 {
-	normalised := make([]float64, len(points))
-	duration := points[len(points)-1]
-	for i, point := range points {
-		normalised[i] = point / duration
+func normalise(intervals []float64) []float64 {
+	normalised := make([]float64, len(intervals))
+	duration := 0.0
+	for _, interval := range intervals {
+		duration += interval
+	}
+	for i, interval := range intervals {
+		normalised[i] = interval / duration
 	}
 
 	return normalised
