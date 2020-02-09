@@ -102,15 +102,7 @@ func (s *Server) loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// FIXME: this is a dummy length check just to validate *something*
-	valid := 0
-	for _, knock := range user.Knocks {
-		if len(knock) == len(login.Knock) {
-			valid++
-		}
-	}
-
-	if valid < len(user.Knocks)/2 {
+	if !MatchesMajority(login.Knock, user.Knocks) {
 		s.status(w, http.StatusForbidden)
 		return
 	}

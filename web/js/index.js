@@ -1,4 +1,5 @@
 import { KnockRecorder } from "./knock_recorder.js";
+import { login } from "./client.js";
 
 let knock_recorder;
 
@@ -24,7 +25,9 @@ function stopRecording() {
     return;
   }
   let knocks = knock_recorder.stop();
-  console.log(knocks);
 
-  knock_recorder = undefined;
+  console.log(knocks);
+  login("test1", knocks);
+
+  delete knock_recorder;
 }

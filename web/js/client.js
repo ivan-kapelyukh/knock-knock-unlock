@@ -1,23 +1,18 @@
-class Client {
-  constructor() {}
+export function login(user, knocks) {
+  const url = "/login";
 
-  async authenticate(user, knocks) {
-    const url = "..../login";
+  const data = {
+    user: user,
+    knocks: knocks
+  };
 
-    const data = {
-      user: user,
-      knocks: knocks
-    };
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
 
-    const response = await fetch(url, {
-      method: "POST",
-      mode: "cors", // TODO: Check this
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    return await response.json();
-  }
+  return await response.json();
 }
