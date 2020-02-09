@@ -18,7 +18,7 @@ class Block {
 export default class Waves {
   constructor() {
     this._noise = new p5.Noise();
-    this._noise.amp(0.01);
+    this._noise.amp(0.005);
 
     this._knock = new p5.Envelope();
     this._knock.setADSR(0.01, 0.01, 0, 0);
