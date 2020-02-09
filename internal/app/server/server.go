@@ -107,5 +107,5 @@ func (s *Server) loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Found user: %v", user)
+	s.status(w, http.StatusOK)
 }
