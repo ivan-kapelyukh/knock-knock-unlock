@@ -31,7 +31,7 @@ function keyHandler(e) {
   let knocks = knockRecorder.stop();
   console.log(knocks);
 
-  let username = document.getElementById("username").value;
+  let username = document.getElementById("username-input").value;
 
   console.log("Username", username);
 
