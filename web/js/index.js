@@ -2,34 +2,21 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { KnockRecorder } from "./knock_recorder.js";
 import { login } from "./client.js";
+import Waves from "./waves.js";
 
-let knock_recorder;
+let waves = new Waves();
+waves.play();
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  document.getElementById("start").addEventListener("click", function() {
-    startRecording();
-  });
+let knockRecorder = new KnockRecorder();
+knockRecorder.add_knock_listener(waves.knock);
 
-  document.getElementById("stop").addEventListener("click", function() {
-    stopRecording();
-  });
+document.getElementById("start").addEventListener("click", function() {
+  console.log("Recording...");
+  knockRecorder.start();
 });
 
-function startRecording() {
-  console.log("Recording...");
-  knock_recorder = new KnockRecorder();
-  knock_recorder.start();
-}
-
-function stopRecording() {
-  if (knock_recorder === undefined) {
-    console.log("Knock recorder not started!");
-    return;
-  }
-  let knocks = knock_recorder.stop();
-
+document.getElementById("stop").addEventListener("click", function() {
+  let knocks = knockRecorder.stop();
   console.log(knocks);
   login("test3", knocks).then(d => console.log(d));
-
-  knock_recorder = undefined
-}
+});

@@ -9,16 +9,12 @@ export class KnockRecorder {
   }
 
   start() {
-    document.addEventListener("keypress", () => {
-      this._keyPressHandler();
-    });
+    this._knocks = [];
+    document.addEventListener("keypress", this._keyPressHandler);
   }
 
   stop() {
-    document.removeEventListener("keypress", () => {
-      this._keyPressHandler();
-    });
-
+    document.removeEventListener("keypress", this._keyPressHandler());
     return this._processed_knocks();
   }
 
