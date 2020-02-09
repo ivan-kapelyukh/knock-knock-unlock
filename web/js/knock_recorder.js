@@ -36,7 +36,12 @@ export class KnockRecorder {
     return res;
   }
 
-  _keyPressHandler() {
+  _keyPressHandler(e) {
+    if (e.keyCode == 13) {
+      // Enter press
+      return;
+    }
+
     this._knocks.push(Date.now());
 
     for (let listener of this._listeners) {
