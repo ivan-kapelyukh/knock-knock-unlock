@@ -9,7 +9,8 @@ knockRecorder.add_knock_listener(waves.knock.bind(waves));
 
 console.log("Loading...");
 
-document.getElementById("start").addEventListener("click", function() {
+document.getElementById("start").addEventListener("submit", function(e) {
+  e.preventDefault();
   console.log("Recording...");
   document.getElementById("username").style.display = "none";
   document.getElementById("waves-view").style.display = "flex";
