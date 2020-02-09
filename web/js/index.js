@@ -7,10 +7,12 @@ let waves = new Waves();
 let knockRecorder = new KnockRecorder();
 knockRecorder.add_knock_listener(waves.knock.bind(waves));
 
-console.log("Loading...");
+document.getElementById("username-input").value = "";
+document.getElementById("username-input").focus();
 
 document.getElementById("start").addEventListener("submit", function(e) {
   e.preventDefault();
+  document.getElementById("username-input").blur();
   console.log("Recording...");
   document.getElementById("username").classList.add("hide");
   document.getElementById("waves-view").style.display = "flex";
@@ -41,6 +43,10 @@ function keyHandler(e) {
 
   logginResp
     .then(d => {
+      if (d.status != 200) {
+        throw "not 200!";
+      }
+
       console.log("logginResp", logginResp);
       console.log("Return data", d);
 
