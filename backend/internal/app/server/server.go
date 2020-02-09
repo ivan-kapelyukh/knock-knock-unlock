@@ -40,13 +40,19 @@ func (s *Server) registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO: check that the user has >= 3 training runs
 	decoder := json.NewDecoder(r.Body)
 	var user mongo.User
 	err := decoder.Decode(&user)
 
 	if err != nil {
 		log.Printf("Error decoding `%v` into mongo.User: %v\n", r.Body, err)
+		s.status(w, http.StatusBadRequest)
+		return
+	}
+
+	err = user.Validate()
+
+	if err != nil {
 		s.status(w, http.StatusBadRequest)
 		return
 	}
@@ -80,9 +86,29 @@ func (s *Server) loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = login.Validate()
+
+	if err != nil {
+		s.status(w, http.StatusBadRequest)
+		return
+	}
+
 	user, err := s.mongo.Find(login.Username)
 
 	if err != nil {
+		s.status(w, http.StatusForbidden)
+		return
+	}
+
+	// FIXME: this is a dummy length check just to validate *something*
+	valid := 0
+	for _, knock := range user.Knocks {
+		if len(knock) == len(login.Knock) {
+			valid++
+		}
+	}
+
+	if valid < len(user.Knocks)/2 {
 		s.status(w, http.StatusForbidden)
 		return
 	}
