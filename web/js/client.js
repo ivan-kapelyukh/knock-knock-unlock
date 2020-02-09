@@ -1,4 +1,4 @@
-export function login(user, knocks) {
+export async function login(user, knocks) {
   const url = "/login";
 
   const data = {

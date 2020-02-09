@@ -29,5 +29,5 @@ function stopRecording() {
   console.log(knocks);
   login("test1", knocks);
 
-  delete knock_recorder;
+  knock_recorder = undefined
 }

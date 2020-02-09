@@ -5,18 +5,6 @@ import (
 	"math"
 )
 
-func main() {
-	// Intervals in milliseconds
-	// Straw, be-rry. Cheese-cake.
-	attempt := []int{1000, 500, 1000, 500}
-
-	sigs := [][]int{{800, 600, 1050, 520},
-		{1100, 480, 970, 510},
-		{100, 100, 100, 100}}
-
-	fmt.Printf("Matches majority? %v", MatchesMajority(attempt, sigs))
-}
-
 func MatchesMajority(attempt []int, sigs [][]int) bool {
 	normAttempt := normalise(millisToSecs(attempt))
 
