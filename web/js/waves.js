@@ -22,9 +22,9 @@ export default class Waves {
 
     this._knock = new p5.Envelope();
     this._knock.setADSR(0.015, 0.025, 0, 0);
-    this._knock.setRange(1, 0);
+    this._knock.setRange(100, 0);
 
-    this._knockOsc = new p5.Oscillator(400, "sine");
+    this._knockOsc = new p5.Oscillator(1350, "sine");
     this._knockOsc.amp(this._knock);
 
     this._fft = new p5.FFT();
@@ -57,14 +57,12 @@ export default class Waves {
       for (let i = 0; i < blocks.length; i++) {
         let block = blocks[i];
 
-        const maxHeight = 250;
+        const maxHeight = 500;
 
-        let height = 0;
-        if (i < heights.length) {
-          height = p.map(spectrum[i], 0, 255, 0, maxHeight);
-        }
+        let j = p.round((spectrum.length * i) / (blocks.length * 8));
+        let height = spectrum[j];
 
-        let rgb = this.getColor(height / maxHeight);
+        let rgb = this._getColor(height / maxHeight);
 
         p.fill(rgb[0], rgb[1], rgb[2]);
         block.draw(height);
@@ -72,7 +70,7 @@ export default class Waves {
     };
   }
 
-  getColor(weight) {
+  _getColor(weight) {
     const color1 = [138, 35, 135];
     const color2 = [233, 64, 87];
     const color3 = [242, 113, 33];

@@ -11,6 +11,8 @@ console.log("Loading...");
 
 document.getElementById("start").addEventListener("click", function() {
   console.log("Recording...");
+  document.getElementById("username").style.display = "none";
+  document.getElementById("waves-view").style.display = "flex";
   waves.play();
   knockRecorder.start();
 });

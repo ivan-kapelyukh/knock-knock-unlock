@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" />
     <link rel="stylesheet" href="./css/index.css" />
+
     <title>Knock Knock Unlock</title>
   </head>
 
-  <body>
-    <div class="absolute inset-0 z-10">
-      <h1>Hello, World!</h1>
-
-      <button id="start">Start</button>
-      <button id="stop">Stop</button>
+  <body class="font-light">
+    <div id="username" class="fixed inset-0 z-10 flex items-center justify-center">
+      <div class="p-10 bg-gray-400 rounded-lg">
+        <button id="start">Start</button>
+      </div>
     </div>
 
-    <div id="waves" class="fixed inset-0 z-0"></div>
+    <div
+      id="waves-view"
+      class="hidden fixed inset-0 z-10 flex items-center
+    justify-center"
+      style="margin-bottom: 20%"
+    >
+      <h1 class="text-primary text-6xl flex items-center">
+        <span class="w-16 h-16 bg-primary block mr-10 rounded-full"></span>
+        Record your knock...
+      </h1>
+
+      <!-- <button id="start">Start</button>
+      <button id="stop">Stop</button> -->
+    </div>
+
+    <div id="waves" class="fixed inset-0 z-0" style="margin-top: 8%"></div>
 
     <script src="./js/index.js"></script>
   </body>
