@@ -21,6 +21,10 @@ func MatchesMajority(attempt []int, sigs [][]int) bool {
 
 // Pre: both are normalised
 func matches(a []float64, b []float64) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
 	threshold := 0.05
 	rse, _ := getRse(a, b)
 	return rse < threshold
