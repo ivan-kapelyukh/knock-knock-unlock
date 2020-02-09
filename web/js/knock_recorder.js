@@ -2,6 +2,7 @@ export class KnockRecorder {
   constructor() {
     this._knocks = [];
     this._listeners = [];
+    this._keyPressHandler = this._keyPressHandler.bind(this);
   }
 
   add_knock_listener(listener) {
@@ -10,11 +11,11 @@ export class KnockRecorder {
 
   start() {
     this._knocks = [];
-    document.addEventListener("keypress", () => this._keyPressHandler());
+    document.addEventListener("keypress", this._keyPressHandler);
   }
 
   stop() {
-    document.removeEventListener("keypress", () => this._keyPressHandler());
+    document.removeEventListener("keypress", this._keyPressHandler);
     return this._processed_knocks();
   }
 
