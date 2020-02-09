@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { KnockRecorder } from "./knock_recorder.js";
 import { login } from "./client.js";
 
@@ -27,7 +29,7 @@ function stopRecording() {
   let knocks = knock_recorder.stop();
 
   console.log(knocks);
-  login("test1", knocks);
+  login("test3", knocks).then(d => console.log(d));
 
   knock_recorder = undefined
 }

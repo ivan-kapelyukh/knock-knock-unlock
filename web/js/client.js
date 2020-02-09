@@ -1,10 +1,7 @@
-export async function login(user, knocks) {
+export async function login(username, knock) {
   const url = "/login";
 
-  const data = {
-    user: user,
-    knocks: knocks
-  };
+  const data = { username, knock };
 
   const response = await fetch(url, {
     method: "POST",
@@ -14,5 +11,5 @@ export async function login(user, knocks) {
     body: JSON.stringify(data)
   });
 
-  return await response.json();
+  return await response.text();
 }
