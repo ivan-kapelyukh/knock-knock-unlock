@@ -21,7 +21,7 @@ export default class Waves {
     this._noise.amp(0.005);
 
     this._knock = new p5.Envelope();
-    this._knock.setADSR(0.01, 0.01, 0, 0);
+    this._knock.setADSR(0.015, 0.025, 0, 0);
     this._knock.setRange(1, 0);
 
     this._knockOsc = new p5.Oscillator(400, "sine");
