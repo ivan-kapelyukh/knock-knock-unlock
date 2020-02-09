@@ -6,15 +6,24 @@ import (
 )
 
 func main() {
-	a := []float64{5, 6}
-	b := []float64{5, 7}
-	rse, _ := get_rse(normalise(a), normalise(b))
-	fmt.Printf("%v", rse)
+	// Straw, be-rry. Cheese-cake.
+	rawA := []int{1000, 1200, 2000, 2200}
+	rawB := []int{800, 1100, 2100, 2200}
+
+	a := normalise(millisToSecs(rawA))
+	b := normalise(millisToSecs(rawB))
+
+	rse, _ := getRse(a, b)
+	fmt.Printf("%v\n", rse)
+
+	threshold := 0.1
+	matches := rse < threshold
+	fmt.Printf("Matches? %v\n", matches)
 }
 
 // Get pointwise root squared error
 // Input values should be sorted and between 0 and 1
-func get_rse(a []float64, b []float64) (rse float64, err error) {
+func getRse(a []float64, b []float64) (rse float64, err error) {
 	if len(a) != len(b) {
 		return -1, fmt.Errorf("need same number of points to calculate error")
 	}
@@ -35,4 +44,13 @@ func normalise(points []float64) []float64 {
 	}
 
 	return normalised
+}
+
+func millisToSecs(millis []int) []float64 {
+	secs := make([]float64, len(millis))
+	for i := range secs {
+		secs[i] = float64(millis[i]) / 1000
+	}
+
+	return secs
 }
