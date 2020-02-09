@@ -1,6 +1,5 @@
 import { KnockRecorder } from "./knock_recorder.js";
 import { login } from "./client.js";
-import Record from "./record.js";
 import Waves from "./waves.js";
 
 let waves = new Waves();
