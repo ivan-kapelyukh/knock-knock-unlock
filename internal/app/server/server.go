@@ -11,18 +11,20 @@ import (
 )
 
 type Server struct {
-	port  int
-	mongo *mongo.Mongo
+	port      int
+	staticDir string
+	mongo     *mongo.Mongo
 }
 
-func New(port int, mongo *mongo.Mongo) Server {
-	return Server{port, mongo}
+func New(port int, staticDir string, mongo *mongo.Mongo) Server {
+	return Server{port, staticDir, mongo}
 }
 
 func (s *Server) Serve() error {
 	r := mux.NewRouter()
 	r.HandleFunc("/register", s.registerHandler)
 	r.HandleFunc("/login", s.loginHandler)
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(s.staticDir)))
 	http.Handle("/", r)
 
 	fmt.Printf("Listening on localhost:%v...\n", s.port)

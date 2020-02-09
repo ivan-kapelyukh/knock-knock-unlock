@@ -8,6 +8,7 @@ import (
 )
 
 const serverPort = 8080
+const staticDir = "./web/dist/"
 const mongoHost = "localhost"
 const mongoPort = 27017
 
@@ -18,6 +19,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	server := server.New(serverPort, mongo)
+	server := server.New(serverPort, staticDir, mongo)
 	log.Fatal(server.Serve())
 }
