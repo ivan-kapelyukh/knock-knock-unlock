@@ -3,13 +3,28 @@
 @tailwind utilities;
 
 @keyframes blink {
-  0% { background-color: #810f1f; }
-  50% { background-color: #e94057; }
-  100% { background-color: #810f1f; }
+  0% {
+    background-color: #810f1f;
+  }
+  50% {
+    background-color: #e94057;
+  }
+  100% {
+    background-color: #810f1f;
+  }
 }
 
 .record-icon {
   animation-name: blink;
   animation-duration: 1s;
   animation-iteration-count: infinite;
+}
+
+#username {
+  transition: all 0.2s ease;
+}
+
+.hide {
+  visibility: none;
+  opacity: 0;
 }

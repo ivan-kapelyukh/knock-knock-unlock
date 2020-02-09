@@ -12,7 +12,7 @@ console.log("Loading...");
 document.getElementById("start").addEventListener("submit", function(e) {
   e.preventDefault();
   console.log("Recording...");
-  document.getElementById("username").style.display = "none";
+  document.getElementById("username").classList.add("hide");
   document.getElementById("waves-view").style.display = "flex";
   waves.play();
   knockRecorder.start();

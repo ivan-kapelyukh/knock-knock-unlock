@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,600&display=swap" />
     <link rel="stylesheet" href="./css/index.css" />
 
     <title>Knock Knock Unlock</title>
@@ -11,14 +11,15 @@
     <div
       id="username"
       class="fixed inset-0 z-10 flex items-center
-    justify-center bg-gray-200"
+    justify-center bg-gray-200 bg-tertiary"
     >
       <div>
-        <form id="start" class="bg-white py-8 shadow-xl text-3xl rounded-full">
-          <input class="ml-16 outline-none" style="width: 800px" placeholder="Your username here" />
+        <form id="start" class="bg-white py-6 shadow-xl text-3xl rounded-full">
+          <input class="ml-16 mr-4 outline-none" style="width: 700px"
+          placeholder="Start with your username...." />
           <button
             type="submit"
-            class="w-16 h-16 bg-secondary inline-block mr-10 text-white
+            class="w-16 h-16 bg-tertiary inline-block mr-10 text-white
           rounded-full text-4xl"
           >
             →
@@ -33,9 +34,10 @@
     justify-center"
       style="margin-bottom: 20%"
     >
-      <h1 class="text-primary text-6xl flex items-center">
-        <span class="w-16 h-16 bg-primary block mr-10 rounded-full record-icon"></span>
-        Record your knock...
+      <h1 class="text-white text-3xl flex items-center bg-primary rounded-full
+      px-12 py-6 tracking-widest font-bold uppercase">
+        <span class="w-12 h-12 bg-primary block mr-6 rounded-full record-icon"></span>
+        Record your knock
       </h1>
     </div>
 
