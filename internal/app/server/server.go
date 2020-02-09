@@ -98,7 +98,20 @@ func (s *Server) loginHandler(w http.ResponseWriter, r *http.Request) {
 	user, err := s.mongo.Find(login.Username)
 
 	if err != nil {
-		s.status(w, http.StatusForbidden)
+		// FIXME: assuming the user does not exist
+		user := mongo.User{login.Username, [][]int{login.Knock, login.Knock, login.Knock}}
+
+		err = s.mongo.Insert(user)
+
+		if err != nil {
+			log.Printf("Error storing %v into kku.users: %v\n", user, err)
+
+			// TODO: this might also be an internal server error
+			s.status(w, http.StatusBadRequest)
+			return
+		}
+
+		fmt.Fprintf(w, "200 REGISTERED")
 		return
 	}
 

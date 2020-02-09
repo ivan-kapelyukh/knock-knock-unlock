@@ -30,5 +30,30 @@ function keyHandler(e) {
   // Enter pressed
   let knocks = knockRecorder.stop();
   console.log(knocks);
-  login("test3", knocks).then(d => console.log(d.text()));
+
+  let username = document.getElementById("username").value;
+
+  console.log("Username", username);
+
+  login(username, knocks)
+    .then(d => {
+      console.log("Return data", d);
+
+      document.getElementById("waves-view").style.display = "none";
+      document.getElementById("waves").style.display = "none";
+
+      if (d.includes("registered")) {
+        console.log("Registered!");
+        document.getElementById("registered").style.display = "flex";
+      } else {
+        console.log("Logged in!");
+        document.getElementById("success").style.display = "flex";
+      }
+    })
+    .catch(() => {
+      console.log("Failed!");
+      document.getElementById("waves-view").style.display = "none";
+      document.getElementById("waves").style.display = "none";
+      document.getElementById("failure").style.display = "flex";
+    });
 }
