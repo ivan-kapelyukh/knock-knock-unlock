@@ -7,18 +7,34 @@ import (
 
 func main() {
 	// Straw, be-rry. Cheese-cake.
-	rawA := []int{1000, 1200, 2000, 2200}
-	rawB := []int{800, 1100, 2100, 2200}
+	attempt := []int{1000, 1200, 2000, 2200}
 
-	a := normalise(millisToSecs(rawA))
-	b := normalise(millisToSecs(rawB))
+	sigs := [][]int{{800, 1100, 2100, 2200},
+		{1100, 1200, 1900, 2250},
+		{100, 100, 100, 100}}
 
-	rse, _ := getRse(a, b)
-	fmt.Printf("%v\n", rse)
+	fmt.Printf("Matches majority? %v", MatchesMajority(attempt, sigs))
+}
 
+func MatchesMajority(attempt []int, sigs [][]int) bool {
+	normAttempt := normalise(millisToSecs(attempt))
+
+	matched := 0
+	for _, sig := range sigs {
+		normSig := normalise(millisToSecs(sig))
+		if matches(normAttempt, normSig) {
+			matched++
+		}
+	}
+
+	return float64(matched) >= float64(len(sigs))/2
+}
+
+// Pre: both are normalised
+func matches(a []float64, b []float64) bool {
 	threshold := 0.1
-	matches := rse < threshold
-	fmt.Printf("Matches? %v\n", matches)
+	rse, _ := getRse(a, b)
+	return rse < threshold
 }
 
 // Get pointwise root squared error
@@ -39,8 +55,8 @@ func getRse(a []float64, b []float64) (rse float64, err error) {
 func normalise(points []float64) []float64 {
 	normalised := make([]float64, len(points))
 	duration := points[len(points)-1]
-	for i := range points {
-		normalised[i] = points[i] / duration
+	for i, point := range points {
+		normalised[i] = point / duration
 	}
 
 	return normalised
@@ -48,8 +64,8 @@ func normalise(points []float64) []float64 {
 
 func millisToSecs(millis []int) []float64 {
 	secs := make([]float64, len(millis))
-	for i := range secs {
-		secs[i] = float64(millis[i]) / 1000
+	for i, milli := range millis {
+		secs[i] = float64(milli) / 1000
 	}
 
 	return secs
