@@ -16,9 +16,7 @@
   },
   "dependencies": {
     "autoprefixer": "^9.7.4",
-    "tailwindcss": "^1.2.0",
-    "core-js": "^3.6.4",
-    "regenerator-runtime": "^0.13.3",
-    "p5": "^0.10.2"
+    "p5": "^0.10.2",
+    "tailwindcss": "^1.2.0"
   }
 }
