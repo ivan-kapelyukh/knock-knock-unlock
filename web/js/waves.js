@@ -57,14 +57,47 @@ export default class Waves {
       for (let i = 0; i < blocks.length; i++) {
         let block = blocks[i];
 
+        const maxHeight = 250;
+
         let height = 0;
         if (i < heights.length) {
-          height = p.map(spectrum[i], 0, 255, 0, 250);
+          height = p.map(spectrum[i], 0, 255, 0, maxHeight);
         }
 
+        let rgb = this.getColor(height / maxHeight);
+
+        p.fill(rgb[0], rgb[1], rgb[2]);
         block.draw(height);
       }
     };
+  }
+
+  getColor(weight) {
+    const color1 = [138, 35, 135];
+    const color2 = [233, 64, 87];
+    const color3 = [242, 113, 33];
+
+    if (weight < 0.5) {
+      let w1 = weight * 2;
+      let w2 = 1 - w1;
+      let rgb = [
+        Math.round(color1[0] * w1 + color2[0] * w2),
+        Math.round(color1[1] * w1 + color2[1] * w2),
+        Math.round(color1[2] * w1 + color2[2] * w2)
+      ];
+
+      return rgb;
+    } else {
+      let w1 = (weight - 0.5) * 2;
+      let w2 = 1 - w1;
+      let rgb = [
+        Math.round(color2[0] * w1 + color3[0] * w2),
+        Math.round(color2[1] * w1 + color3[1] * w2),
+        Math.round(color2[2] * w1 + color3[2] * w2)
+      ];
+
+      return rgb;
+    }
   }
 
   play() {
