@@ -35,23 +35,32 @@ function keyHandler(e) {
 
   console.log("Username", username);
 
-  login(username, knocks)
+  let logginResp = login(username, knocks);
+
+  console.log("logginResp", logginResp);
+
+  logginResp
     .then(d => {
+      console.log("logginResp", logginResp);
       console.log("Return data", d);
 
       document.getElementById("waves-view").style.display = "none";
       document.getElementById("waves").style.display = "none";
 
-      if (d.includes("registered")) {
-        console.log("Registered!");
-        document.getElementById("registered").style.display = "flex";
-      } else {
-        console.log("Logged in!");
-        document.getElementById("success").style.display = "flex";
-      }
+      d.text().then(text => {
+        console.log("text", text);
+        if (text.includes("REGISTERED")) {
+          console.log("Registered!");
+          document.getElementById("registered").style.display = "flex";
+        } else {
+          console.log("Logged in!");
+          document.getElementById("success").style.display = "flex";
+        }
+      });
     })
-    .catch(() => {
-      console.log("Failed!");
+    .catch(d => {
+      console.log("logginResp", logginResp);
+      console.log("Failed!", d);
       document.getElementById("waves-view").style.display = "none";
       document.getElementById("waves").style.display = "none";
       document.getElementById("failure").style.display = "flex";
