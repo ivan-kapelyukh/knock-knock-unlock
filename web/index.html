@@ -15,7 +15,7 @@
     >
       <div>
         <form id="start" class="bg-white py-8 shadow-xl text-3xl rounded-full">
-          <input class="ml-16 outline-none" style="width: 800px" placeholder="Your username here" />
+          <input id="username" class="ml-16 outline-none" style="width: 800px" placeholder="Your username here" />
           <button
             type="submit"
             class="w-16 h-16 bg-secondary inline-block mr-10 text-white
@@ -46,6 +46,15 @@
     >
       <h1 class="text-6xl flex items-center">
         Successfully signed in!
+    </div>
+
+    <div
+      id="registered"
+      class="hidden fixed inset-0 z-10 flex items-center
+    justify-center bg-secondary text-white"
+    >
+      <h1 class="text-6xl flex items-center">
+        Successfully registered!
     </div>
 
     <div
