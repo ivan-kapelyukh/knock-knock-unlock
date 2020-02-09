@@ -10,11 +10,11 @@ export class KnockRecorder {
 
   start() {
     this._knocks = [];
-    document.addEventListener("keypress", this._keyPressHandler);
+    document.addEventListener("keypress", () => this._keyPressHandler());
   }
 
   stop() {
-    document.removeEventListener("keypress", this._keyPressHandler());
+    document.removeEventListener("keypress", () => this._keyPressHandler());
     return this._processed_knocks();
   }
 
@@ -35,10 +35,10 @@ export class KnockRecorder {
     return res;
   }
 
-  _keyPressHandler(e) {
+  _keyPressHandler() {
     this._knocks.push(Date.now());
 
-    for (let listener in this._listeners) {
+    for (let listener of this._listeners) {
       listener();
     }
   }
